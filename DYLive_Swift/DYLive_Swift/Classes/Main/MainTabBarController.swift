@@ -13,7 +13,17 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        addChildVC(storyName: "Home")
+        addChildVC(storyName: "Live")
+        addChildVC(storyName: "Follow")
+        addChildVC(storyName: "Profile")
+        
     }
 
+    func addChildVC(storyName: String) {
+        
+        let childVC = UIStoryboard(name: storyName, bundle: nil).instantiateInitialViewController()!
+        
+        addChildViewController(childVC)
+    }
 }

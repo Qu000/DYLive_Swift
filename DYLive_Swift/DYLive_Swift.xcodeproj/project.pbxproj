@@ -18,6 +18,12 @@
 		51E0F7BB20CE4C570032090B /* Follow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51E0F7B920CE4C570032090B /* Follow.storyboard */; };
 		51E0F7BE20CE4C6B0032090B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51E0F7BC20CE4C6B0032090B /* Profile.storyboard */; };
 		51E0F7C020CE4D110032090B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7BF20CE4D110032090B /* MainTabBarController.swift */; };
+		51E0F7C220CE52580032090B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7C120CE52580032090B /* HomeViewController.swift */; };
+		51E0F7C520CE58B00032090B /* UIBarButtonItem_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7C420CE58B00032090B /* UIBarButtonItem_Extension.swift */; };
+		51E0F7C720CE61720032090B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7C620CE61720032090B /* PageTitleView.swift */; };
+		51E0F7C920CE646A0032090B /* CommonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7C820CE646A0032090B /* CommonConfig.swift */; };
+		51E0F7CB20CE74400032090B /* PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7CA20CE74400032090B /* PageContentView.swift */; };
+		51E0F7CD20CE78080032090B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E0F7CC20CE78080032090B /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,12 @@
 		51E0F7BA20CE4C570032090B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DYLive_Swift/Base.lproj/Follow.storyboard; sourceTree = "<group>"; };
 		51E0F7BD20CE4C6B0032090B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DYLive_Swift/Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		51E0F7BF20CE4D110032090B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		51E0F7C120CE52580032090B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		51E0F7C420CE58B00032090B /* UIBarButtonItem_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem_Extension.swift; sourceTree = "<group>"; };
+		51E0F7C620CE61720032090B /* PageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
+		51E0F7C820CE646A0032090B /* CommonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConfig.swift; sourceTree = "<group>"; };
+		51E0F7CA20CE74400032090B /* PageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
+		51E0F7CC20CE78080032090B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +102,10 @@
 				510A20C020CE24E700299D65 /* Classes */,
 				510A20D520CE24E700299D65 /* AppDelegate.swift */,
 				510A20A420CE248D00299D65 /* Main.storyboard */,
-				51E0F7BC20CE4C6B0032090B /* Profile.storyboard */,
+				51E0F7B320CE4BEE0032090B /* Home.storyboard */,
 				51E0F7B920CE4C570032090B /* Follow.storyboard */,
 				51E0F7B620CE4C330032090B /* Live.storyboard */,
-				51E0F7B320CE4BEE0032090B /* Home.storyboard */,
+				51E0F7BC20CE4C6B0032090B /* Profile.storyboard */,
 				510A20A720CE248E00299D65 /* Assets.xcassets */,
 				510A20A920CE248E00299D65 /* LaunchScreen.storyboard */,
 				510A20AC20CE248E00299D65 /* Info.plist */,
@@ -126,9 +138,9 @@
 		510A20C120CE24E700299D65 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				510A20C220CE24E700299D65 /* ViewModel */,
 				510A20C320CE24E700299D65 /* Controller */,
 				510A20C420CE24E700299D65 /* View */,
+				510A20C220CE24E700299D65 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -143,6 +155,7 @@
 		510A20C320CE24E700299D65 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				51E0F7C120CE52580032090B /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -150,6 +163,8 @@
 		510A20C420CE24E700299D65 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				51E0F7C620CE61720032090B /* PageTitleView.swift */,
+				51E0F7CA20CE74400032090B /* PageContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,6 +172,7 @@
 		510A20C520CE24E700299D65 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				51E0F7C320CE585D0032090B /* Extension */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -271,6 +287,16 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		51E0F7C320CE585D0032090B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				51E0F7C420CE58B00032090B /* UIBarButtonItem_Extension.swift */,
+				51E0F7C820CE646A0032090B /* CommonConfig.swift */,
+				51E0F7CC20CE78080032090B /* UIColorExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -376,9 +402,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E0F7C720CE61720032090B /* PageTitleView.swift in Sources */,
 				510A20D720CE24E700299D65 /* AppDelegate.swift in Sources */,
 				510A20D620CE24E700299D65 /* ViewController.swift in Sources */,
+				51E0F7CB20CE74400032090B /* PageContentView.swift in Sources */,
+				51E0F7C520CE58B00032090B /* UIBarButtonItem_Extension.swift in Sources */,
+				51E0F7CD20CE78080032090B /* UIColorExtension.swift in Sources */,
 				51E0F7C020CE4D110032090B /* MainTabBarController.swift in Sources */,
+				51E0F7C920CE646A0032090B /* CommonConfig.swift in Sources */,
+				51E0F7C220CE52580032090B /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
