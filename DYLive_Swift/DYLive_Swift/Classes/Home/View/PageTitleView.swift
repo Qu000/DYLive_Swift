@@ -8,15 +8,18 @@
 
 import UIKit
 
-let kScrollLineH : CGFloat = 2
-let kBottomLineColor : UIColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
-let kSelectColor : UIColor = UIColor(red: 255/255.0, green: 160/255.0, blue: 95/255.0, alpha: 1)
+private let kScrollLineH : CGFloat = 2
+private let kBottomLineColor : UIColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
+private let kSelectColor : UIColor = UIColor(red: 255/255.0, green: 160/255.0, blue: 95/255.0, alpha: 1)
 
+private let NormalColor : (CGFloat, CGFloat, CGFloat) = (90, 90, 90)
+private let SelectColor : (CGFloat, CGFloat, CGFloat) = (255, 128 ,0)
 // MARK: - 联动的代理 selectIndex内部参数，index外部参数
 protocol PageTitleViewDelegate : class {
     func pageTitleView(titleView : PageTitleView, selectIndex index : Int)
 }
 
+// MARK: - 定义PageTitleView这个类
 class PageTitleView: UIView {
     
     // MARK: - 定义属性
@@ -83,7 +86,7 @@ extension PageTitleView {
             titleLab.text = title
             titleLab.tag = index
             titleLab.font = UIFont.systemFont(ofSize: 15.0)
-            titleLab.textColor = UIColor.darkGray
+            titleLab.textColor = UIColor(r: NormalColor.0, g: NormalColor.1, b: NormalColor.2)
             titleLab.textAlignment = .center
             
             let labelX : CGFloat = labelW * CGFloat(index)
@@ -98,7 +101,7 @@ extension PageTitleView {
             titleLab.addGestureRecognizer(tapGes)
         }
         let firstLab = titleLabViews.first
-        firstLab?.textColor = UIColor.orange
+        firstLab?.textColor = UIColor(r: SelectColor.0, g: SelectColor.1, b: SelectColor.2)
         
     }
     
@@ -128,8 +131,8 @@ extension PageTitleView {
         }
         
         let oldLab = titleLabViews[currentIndex]
-        oldLab.textColor = kBottomLineColor
-        currentLab.textColor = kSelectColor
+        oldLab.textColor = UIColor(r: NormalColor.0, g: NormalColor.1, b: NormalColor.2)
+        currentLab.textColor = UIColor(r: SelectColor.0, g: SelectColor.1, b: SelectColor.2)
         
         currentIndex = currentLab.tag
         
@@ -144,7 +147,27 @@ extension PageTitleView {
     }
 }
 
-
+// MARK: - 对外暴露的方法
+extension PageTitleView {
+    func setTitleWithProgress(progress : CGFloat, sourceIndex : Int, targetIndex : Int) {
+        
+        let sourceLab = titleLabViews[sourceIndex]
+        let targetLab = titleLabViews[targetIndex]
+        
+        let moveTotalX = targetLab.frame.origin.x - sourceLab.frame.origin.x
+        let moveX = moveTotalX * progress
+        scrollLine.frame.origin.x = sourceLab.frame.origin.x + moveX
+        
+        //颜色渐变
+        let colorDelta = (SelectColor.0 - NormalColor.0, SelectColor.1 - NormalColor.1, SelectColor.2 - NormalColor.2)
+        sourceLab.textColor = UIColor(r: SelectColor.0 - colorDelta.0*progress, g: SelectColor.1 - colorDelta.1*progress, b: SelectColor.2 - colorDelta.2*progress)
+     
+        targetLab.textColor = UIColor(r: SelectColor.0 + colorDelta.0*progress, g: SelectColor.1 + colorDelta.1*progress, b: SelectColor.2 + colorDelta.2*progress)
+        
+        //记录最新的index
+        currentIndex = targetIndex
+    }
+}
 
 
 
