@@ -10,11 +10,19 @@ import UIKit
 
 let kScrollLineH : CGFloat = 2
 let kBottomLineColor : UIColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
+let kSelectColor : UIColor = UIColor(red: 255/255.0, green: 160/255.0, blue: 95/255.0, alpha: 1)
+
+// MARK: - 联动的代理 selectIndex内部参数，index外部参数
+protocol PageTitleViewDelegate : class {
+    func pageTitleView(titleView : PageTitleView, selectIndex index : Int)
+}
 
 class PageTitleView: UIView {
     
     // MARK: - 定义属性
     var titles : [String]
+    var currentIndex : Int = 0
+    weak var pageDelegate : PageTitleViewDelegate?
     
     // MARK: - 懒加载
     lazy var scrollView : UIScrollView = {
@@ -84,6 +92,10 @@ extension PageTitleView {
             
             scrollView.addSubview(titleLab)
             titleLabViews.append(titleLab)
+            
+            titleLab.isUserInteractionEnabled = true
+            let tapGes = UITapGestureRecognizer(target: self, action: #selector(self.titleLabClick(tapGes:)))
+            titleLab.addGestureRecognizer(tapGes)
         }
         let firstLab = titleLabViews.first
         firstLab?.textColor = UIColor.orange
@@ -106,7 +118,31 @@ extension PageTitleView {
     }
 }
 
-
+// MARK: - 监听titleLab的点击事件,需要添加@objc
+extension PageTitleView {
+    @objc func titleLabClick(tapGes : UITapGestureRecognizer) {
+        guard let currentLab = tapGes.view as? UILabel else { return }
+        
+        if currentLab.tag == currentIndex {
+            return
+        }
+        
+        let oldLab = titleLabViews[currentIndex]
+        oldLab.textColor = kBottomLineColor
+        currentLab.textColor = kSelectColor
+        
+        currentIndex = currentLab.tag
+        
+        let lineX = CGFloat(currentIndex) * scrollLine.frame.width
+        UIView.animate(withDuration: 0.25) {
+            self.scrollLine.frame.origin.x = lineX
+        }
+        
+        //通知代理
+        pageDelegate?.pageTitleView(titleView: self, selectIndex: currentIndex)
+        
+    }
+}
 
 
 

@@ -13,15 +13,15 @@ let ContentCellID = "ContentCellID"
 
 class PageContentView: UIView {
     // MARK: - 定义属性
-    let childVCs : [UIViewController]
-    let presentVC : UIViewController
+    var childVCs : [UIViewController]
+    weak var presentVC : UIViewController?
     
     // MARK: - 懒加载属性
-    lazy var collectionView : UICollectionView = {
+    lazy var collectionView : UICollectionView = {[weak self] in
         
         //创建layout
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = self.bounds.size
+        layout.itemSize = (self?.bounds.size)!
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
@@ -31,13 +31,14 @@ class PageContentView: UIView {
         collectionView.isPagingEnabled = true
         collectionView.bounces = false
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ContentCellID)
         
         return collectionView
     }()
     
     // MARK: - 自定义构造函数
-    init(frame: CGRect, childVCs : [UIViewController], presentViewController: UIViewController) {
+    init(frame: CGRect, childVCs : [UIViewController], presentViewController: UIViewController?) {
         
         self.childVCs = childVCs
         self.presentVC = presentViewController
@@ -58,7 +59,7 @@ extension PageContentView {
         
         //将自控制器加到父控制器中
         for childVC in childVCs {
-            presentVC.addChildViewController(childVC)
+            presentVC?.addChildViewController(childVC)
         }
         
         //添加UICollectionView，将子控制器的View放入Cell
@@ -92,8 +93,20 @@ extension PageContentView : UICollectionViewDataSource {
     }
 }
 
+// MARK: - 遵守UICollectionViewDelegate
+extension PageContentView : UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+}
 
-
+// MARK: - 对外暴露的方法
+extension PageContentView {
+    func setCurrentIndex(currentIndex : Int) {
+        let offsetX = CGFloat(currentIndex) * collectionView.frame.width
+        collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
+    }
+}
 
 
 
